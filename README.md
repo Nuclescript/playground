@@ -1,3 +1,22 @@
+# NucleScript Playground
+
+> **This is the [Nuclescript organization](https://github.com/Nuclescript)'s
+> playground repo.** It's a self-contained mirror of the NucleOS engine
+> (source of truth: [VyomKulshrestha/Nucle-OS](https://github.com/VyomKulshrestha/Nucle-OS))
+> plus the `nucle_playground` crate, so the interactive web playground builds
+> and runs standalone from here:
+>
+> ```bash
+> cargo run -p nucle_playground
+> # then open http://127.0.0.1:8080 and paste a .nsl program to analyze
+> ```
+>
+> Official NucleScript packages (`@nuclescript/presets`, `@nuclescript/profiles`,
+> `@nuclescript/benchmarks`, `@nuclescript/recovery`) are published separately
+> to [this org's package registry](https://github.com/orgs/Nuclescript/packages).
+
+---
+
 # Nucle-OS — DNA Storage Engine
 
 **A complete software-defined DNA storage operating system.**
