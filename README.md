@@ -8,8 +8,27 @@
 >
 > ```bash
 > cargo run -p nucle_playground
-> # then open http://127.0.0.1:8080 and paste a .nsl program to analyze
+> # then open http://127.0.0.1:8080
 > ```
+>
+> No `cargo` or cloning needed at all? Grab a prebuilt binary from the
+> [**Releases**](https://github.com/Nuclescript/playground/releases) page —
+> Linux, Windows, and macOS builds with the frontend embedded, so running the
+> single downloaded file is enough.
+>
+> The playground has three tabs, each backed by the real engine (no
+> reimplemented math, no mocked data):
+>
+> - **Write & Run** — paste a `.nsl` program and get compiler diagnostics,
+>   simulation steps, and optimizer notes.
+> - **Benchmark Explorer** — pick a codec/profile, drag the redundancy
+>   slider, and density/GC%/cost/recovery-probability update live, computed
+>   by the real codec benchmark plus a Reed-Solomon-aware Monte-Carlo
+>   recovery estimate.
+> - **Pipeline Visualizer** — encodes real input through the actual
+>   codec/ECC/noise engine and animates each strand through
+>   encode → synthesize/sequence (noise) → recover, including honest
+>   failures when redundancy/profile can't reconstruct the data.
 >
 > Official NucleScript packages (`@nuclescript/presets`, `@nuclescript/profiles`,
 > `@nuclescript/benchmarks`, `@nuclescript/recovery`) are published separately
