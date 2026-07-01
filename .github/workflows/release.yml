@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset_name: nucle_playground-linux-x86_64
+            bin_path: target/release/nucle_playground
+          - os: windows-latest
+            asset_name: nucle_playground-windows-x86_64.exe
+            bin_path: target/release/nucle_playground.exe
+          - os: macos-latest
+            asset_name: nucle_playground-macos-x86_64
+            bin_path: target/release/nucle_playground
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release -p nucle_playground
+      - name: Stage binary
+        shell: bash
+        run: cp "${{ matrix.bin_path }}" "${{ matrix.asset_name }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}
+          path: ${{ matrix.asset_name }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
+          body: |
+            Standalone NucleScript Playground binaries — no Rust toolchain or
+            cloning required. The static frontend is embedded in the binary.
+
+            Download the file for your OS, then run it:
+
+            - **Linux/macOS**: `chmod +x nucle_playground-* && ./nucle_playground-*`
+            - **Windows**: double-click `nucle_playground-windows-x86_64.exe`
+
+            Then open http://127.0.0.1:8080 in your browser.
