@@ -3,8 +3,9 @@
 NucleScript packages are reusable biological storage presets: pool schemas,
 recovery profiles, pipeline templates, and functions that can be imported by
 `.nsl` source files. Official packages are published under the
-[`@nuclescript` GitHub organization](https://github.com/Nuclescript) — see
-plan2.md's Package Roadmap for the full initial set.
+[Nuclescript GitHub organization](https://github.com/Nuclescript)'s
+[package registry](https://github.com/orgs/Nuclescript/packages), independent
+of NucleOS's own release cadence.
 
 Four packages are bundled with this repository today: `presets`, `profiles`,
 `benchmarks`, and `recovery`.
